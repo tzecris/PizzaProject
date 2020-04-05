@@ -16,4 +16,6 @@ public interface IngredientDaoInt {
 
     public List<Ingredient> findAll();
 
+    public List<Ingredient> findByIDs(List<Integer> ingredientIDs);
+
 }

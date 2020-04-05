@@ -31,8 +31,8 @@ public class PaymentDaoImpl implements PaymentDaoInt {
     @Override
     public List<Payment> findAll() {
         Query q = getSession().createNamedQuery("Payment.findAll");
-        List<Payment> list = q.getResultList();
-        return list;
+        List<Payment> paymenList = q.getResultList();
+        return paymenList;
     }
 
 }

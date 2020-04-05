@@ -44,8 +44,8 @@ public class Payment implements Serializable {
     @Size(max = 50)
     @Column(name = "pname")
     private String pname;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentId")
-    private List<Orders> ordersList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment")
+    private List<Order> ordersList;
 
     public Payment() {
     }
@@ -71,11 +71,11 @@ public class Payment implements Serializable {
     }
 
     @XmlTransient
-    public List<Orders> getOrdersList() {
+    public List<Order> getOrdersList() {
         return ordersList;
     }
 
-    public void setOrdersList(List<Orders> ordersList) {
+    public void setOrdersList(List<Order> ordersList) {
         this.ordersList = ordersList;
     }
 

@@ -14,4 +14,5 @@ import java.util.List;
  */
 public interface BreadSizeDaoInt {
     List<BreadSize> findAll();
+    BreadSize findById(Integer id);
 }

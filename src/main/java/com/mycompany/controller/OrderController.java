@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.controller;
 
+import com.mycompany.dto.OrderDTO;
 import com.mycompany.model.BreadSize;
 import com.mycompany.model.Ingredient;
-import com.mycompany.model.Orders;
+import com.mycompany.model.Order;
+import com.mycompany.model.Payment;
 import com.mycompany.service.BreadSizeService;
 import com.mycompany.service.IngredientService;
+import com.mycompany.service.PaymentService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/order")
@@ -30,9 +27,12 @@ public class OrderController {
     @Autowired
     private IngredientService ingredientService;
 
+    @Autowired
+    private PaymentService paymentService;
+
     @GetMapping
     public String orderForm(Model m) {
-        Orders order = new Orders();
+        OrderDTO order = new OrderDTO();
         m.addAttribute("order", order);
         return "ordermapping";
     }
@@ -46,21 +46,14 @@ public class OrderController {
     public List<Ingredient> getIngredient() {
         return ingredientService.findAll();
     }
+    @ModelAttribute("payments")
+    public List<Payment> getPayment() {
+        return paymentService.findAll();
+    }
 
     @PostMapping("/submitOrder")
-    public String showOrder(
-            @RequestParam("size") String size,
-            @RequestParam("ingredients") List<String> ingredients,
-            @RequestParam("payment") String payment,
-            @RequestParam("name") String name,
-            @RequestParam("age") int age,
-            Model model
-    ) {
-        model.addAttribute("size", size);
-        model.addAttribute("ingredients", ingredients);
-        model.addAttribute("payment", payment);
-        model.addAttribute("name", name);
-        model.addAttribute("age", age);
+    public String showOrder(Model m, @ModelAttribute("order") OrderDTO order) {
+        System.out.println(order.toString());
         return "showOrder";
     }
 

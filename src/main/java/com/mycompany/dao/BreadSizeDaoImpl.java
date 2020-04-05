@@ -35,4 +35,11 @@ public class BreadSizeDaoImpl implements BreadSizeDaoInt {
         return list;
     }
 
+    @Override
+    public BreadSize findById(Integer id) {
+        Query q = getSession().createNamedQuery("BreadSize.findById");
+        q.setParameter("id", id);
+        return (BreadSize) q.getSingleResult();
+    }
+
 }

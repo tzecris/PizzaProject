@@ -47,8 +47,8 @@ public class Customer implements Serializable {
     private String cname;
     @Column(name = "cage")
     private Integer cage;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
-    private List<Orders> ordersList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Order> ordersList;
 
     public Customer() {
     }
@@ -82,11 +82,11 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public List<Orders> getOrdersList() {
+    public List<Order> getOrdersList() {
         return ordersList;
     }
 
-    public void setOrdersList(List<Orders> ordersList) {
+    public void setOrdersList(List<Order> ordersList) {
         this.ordersList = ordersList;
     }
 

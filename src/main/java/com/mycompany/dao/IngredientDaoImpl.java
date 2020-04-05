@@ -6,6 +6,7 @@
 package com.mycompany.dao;
 
 import com.mycompany.model.Ingredient;
+import java.util.Collections;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,6 +32,18 @@ public class IngredientDaoImpl implements IngredientDaoInt {
     @Override
     public List<Ingredient> findAll() {
         Query q = getSession().createNamedQuery("Ingredient.findAll");
+        List<Ingredient> list = q.getResultList();
+        return list;
+    }
+
+    @Override
+    public List<Ingredient> findByIDs(List<Integer> ingredientIDs) {
+        if (ingredientIDs == null || ingredientIDs.isEmpty()) {
+            return Collections.EMPTY_LIST;
+
+        }
+        Query q = getSession().createNamedQuery("Ingredient.findByIds");
+        q.setParameterList("ids", ingredientIDs);
         List<Ingredient> list = q.getResultList();
         return list;
     }

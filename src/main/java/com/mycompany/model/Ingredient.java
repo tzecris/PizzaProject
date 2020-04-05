@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Ingredient.findAll", query = "SELECT i FROM Ingredient i")
     , @NamedQuery(name = "Ingredient.findById", query = "SELECT i FROM Ingredient i WHERE i.id = :id")
+    , @NamedQuery(name = "Ingredient.findByIds", query = "SELECT i FROM Ingredient i WHERE i.id in (:ids)")
     , @NamedQuery(name = "Ingredient.findByIname", query = "SELECT i FROM Ingredient i WHERE i.iname = :iname")})
 public class Ingredient implements Serializable {
 

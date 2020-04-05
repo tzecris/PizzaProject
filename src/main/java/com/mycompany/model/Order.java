@@ -27,9 +27,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "orders")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o")
-    , @NamedQuery(name = "Orders.findById", query = "SELECT o FROM Orders o WHERE o.id = :id")})
-public class Orders implements Serializable {
+    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Order o")
+    , @NamedQuery(name = "Orders.findById", query = "SELECT o FROM Order o WHERE o.id = :id")})
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,18 +39,18 @@ public class Orders implements Serializable {
     private Integer id;
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Customer customerId;
+    private Customer customer;
     @JoinColumn(name = "payment_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Payment paymentId;
+    private Payment payment;
     @JoinColumn(name = "pizza_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Pizza pizza;
 
-    public Orders() {
+    public Order() {
     }
 
-    public Orders(Integer id) {
+    public Order(Integer id) {
         this.id = id;
     }
 
@@ -62,20 +62,20 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public Customer getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public Payment getPaymentId() {
-        return paymentId;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setPaymentId(Payment paymentId) {
-        this.paymentId = paymentId;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Pizza getPizza() {
@@ -96,10 +96,10 @@ public class Orders implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Orders)) {
+        if (!(object instanceof Order)) {
             return false;
         }
-        Orders other = (Orders) object;
+        Order other = (Order) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -108,7 +108,7 @@ public class Orders implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.model.Orders[ id=" + id + " ]";
+        return "com.mycompany.model.Order[ id=" + id + " ]";
     }
 
 }
